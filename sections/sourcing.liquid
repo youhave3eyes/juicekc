@@ -1,0 +1,48 @@
+<section class="sourcing">
+  <div class="sourcing__inner">
+    <h2 class="sourcing__title">{{ section.settings.title }}</h2>
+    <p class="sourcing__lede">{{ section.settings.lede }}</p>
+
+    <ul class="sourcing__list">
+      {%- for block in section.blocks -%}
+        <li class="sourcing__item" {{ block.shopify_attributes }}>
+          <span class="sourcing__mascot">{%- render 'fruit-shape', fruit: block.settings.fruit -%}</span>
+          <span class="sourcing__item-h">{{ block.settings.heading }}</span>
+          <span class="sourcing__item-b">{{ block.settings.body }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sourcing story",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Where the fruit comes from" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Organic first, local when the season allows, and never from concentrate. Here's how a bottle actually gets made." }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Organic produce" },
+        { "type": "text", "id": "fruit", "label": "Mascot", "info": "watermelon, apple, cherries, carrot, banana, pear, avocado", "default": "watermelon" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Certified organic fruit and vegetables, sourced through regional growers and produce partners around the metro." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Sourcing story",
+      "blocks": [
+        { "type": "item", "settings": { "fruit": "orange", "heading": "Organic produce", "body": "Certified organic fruit and vegetables, sourced through regional growers and produce partners around the metro." } },
+        { "type": "item", "settings": { "fruit": "mint", "heading": "Pressed cold", "body": "No heat, no pasteurization shortcuts. The press runs in the morning and bottles go out the same day." } },
+        { "type": "item", "settings": { "fruit": "watermelon", "heading": "Small runs and full cases", "body": "Fifty bottles for a shop or an event, five hundred for a standing wholesale account. Same juice either way." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

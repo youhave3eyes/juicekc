@@ -1,0 +1,49 @@
+<section class="harvest">
+  <div class="harvest__inner">
+    <h2 class="harvest__title">{{ section.settings.title }}</h2>
+    <p class="harvest__sub">{{ section.settings.subtitle }}</p>
+
+    <div class="harvest__grid">
+      {%- for block in section.blocks -%}
+        <div class="pick" {{ block.shopify_attributes }}>
+          <div class="pick__art">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 520 }}" alt="{{ block.settings.image.alt | escape }}" width="520" loading="lazy">
+            {%- else -%}
+              {%- render 'fruit-shape', fruit: block.settings.fruit -%}
+            {%- endif -%}
+          </div>
+          <h3 class="pick__name">{{ block.settings.heading }}</h3>
+          <p class="pick__tag">{{ block.settings.tagline }}</p>
+          <a class="pick__link" href="{{ block.settings.link | default: routes.all_products_collection_url }}">{{ block.settings.link_label }}</a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Harvest cards",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Check out the fruits of our labor" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Sourced, pressed, and bottled with care" }
+  ],
+  "blocks": [
+    {
+      "type": "pick",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Cutout photo", "info": "A transparent PNG of the fruit or bottle. Falls back to an illustration." },
+        { "type": "text", "id": "fruit", "label": "Fallback illustration", "info": "watermelon, apple, cherries, carrot, banana, pear, avocado", "default": "watermelon" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Organic Citrus" },
+        { "type": "text", "id": "tagline", "label": "Tagline", "default": "Seriously satisfying citrus" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "learn more" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Harvest cards" }]
+}
+{% endschema %}

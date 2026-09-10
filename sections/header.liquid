@@ -1,0 +1,85 @@
+<header class="nav" data-nav>
+  <button class="nav__burger" data-menu-open aria-label="Open menu" aria-expanded="false" aria-controls="MenuDrawer">
+    <span></span><span></span><span></span>
+  </button>
+
+  <a class="nav__mark" href="{{ routes.root_url }}">
+    {%- if section.settings.logo != blank -%}
+      <img src="{{ section.settings.logo | image_url: width: 320 }}" alt="{{ shop.name }}" width="{{ section.settings.logo_width }}">
+    {%- else -%}
+      <span class="nav__wordmark">{{ shop.name }}</span>
+    {%- endif -%}
+  </a>
+
+  <nav class="nav__links" aria-label="Main">
+    {%- for link in section.settings.menu.links -%}
+      <a class="nav__link{% if link.active %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+
+  <a class="nav__cart" href="{{ routes.cart_url }}" data-cart-link>
+    <span class="nav__cart-word">Cart</span>
+    <span class="nav__count" data-cart-count>{{ cart.item_count }}</span>
+  </a>
+</header>
+
+<div class="drawer" id="MenuDrawer" data-drawer hidden>
+  <div class="drawer__scrim" data-menu-close></div>
+
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__top">
+      <span class="drawer__brand">{{ shop.name }}</span>
+      <button class="drawer__close" data-menu-close aria-label="Close menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="drawer__nav" aria-label="Menu">
+      {%- for link in section.settings.menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <details class="drawer__group">
+            <summary class="drawer__item drawer__item--parent">
+              {{ link.title }}
+              <svg class="drawer__chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </summary>
+            <div class="drawer__sub">
+              <a class="drawer__item drawer__item--sub" href="{{ link.url }}">All {{ link.title | downcase }}</a>
+              {%- for child in link.links -%}
+                <a class="drawer__item drawer__item--sub" href="{{ child.url }}">{{ child.title }}</a>
+              {%- endfor -%}
+            </div>
+          </details>
+        {%- else -%}
+          <a class="drawer__item{% if link.active %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="drawer__foot">
+      <a class="btn btn--ink btn--wide" href="{{ section.settings.drawer_cta_url | default: routes.all_products_collection_url }}">
+        {{ section.settings.drawer_cta_label }}
+      </a>
+      <div class="drawer__links">
+        <a href="{{ routes.search_url }}">Search</a>
+        <a href="{{ routes.cart_url }}">Cart</a>
+        <a href="{{ routes.account_url }}">Account</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 260, "step": 10, "default": 130 },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "header", "content": "Mobile menu" },
+    { "type": "text", "id": "drawer_cta_label", "label": "Button label", "default": "Shop all juice" },
+    { "type": "url", "id": "drawer_cta_url", "label": "Button link" }
+  ]
+}
+{% endschema %}

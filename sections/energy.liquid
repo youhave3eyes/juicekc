@@ -1,0 +1,94 @@
+<section class="energy">
+  <div class="energy__inner">
+    <div class="energy__head">
+      <h2 class="energy__title">{{ section.settings.title }}</h2>
+      <p class="energy__lede">{{ section.settings.lede }}</p>
+    </div>
+
+    {%- if section.settings.show_compare -%}
+      <div class="energy__compare">
+        <div class="energy__col energy__col--them">
+          <span class="energy__col-h">{{ section.settings.compare_a_title }}</span>
+          <div class="energy__curve" aria-hidden="true">
+            <svg viewBox="0 0 200 80" preserveAspectRatio="none">
+              <path d="M0 72 C24 72 30 10 56 10 C84 10 88 66 120 70 C150 74 172 74 200 74" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="energy__col-b">{{ section.settings.compare_a_text }}</p>
+        </div>
+
+        <div class="energy__col energy__col--us">
+          <span class="energy__col-h">{{ section.settings.compare_b_title }}</span>
+          <div class="energy__curve" aria-hidden="true">
+            <svg viewBox="0 0 200 80" preserveAspectRatio="none">
+              <path d="M0 70 C40 66 60 34 100 28 C140 22 168 26 200 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="energy__col-b">{{ section.settings.compare_b_text }}</p>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <ul class="energy__grid">
+      {%- for block in section.blocks -%}
+        <li class="energy__card" style="--accent:{{ block.settings.accent }};" {{ block.shopify_attributes }}>
+          {%- if block.settings.stat != blank -%}
+            <span class="energy__stat">{{ block.settings.stat }}</span>
+          {%- endif -%}
+          <span class="energy__card-h">{{ block.settings.heading }}</span>
+          <span class="energy__card-b">{{ block.settings.body }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="energy__foot">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Energy and electrolytes",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Energy you don't crash out of" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Caffeine borrows energy against later. Fruit sugar arrives with the water, minerals, and enzymes your body needs to actually use it." },
+
+    { "type": "header", "content": "Comparison" },
+    { "type": "checkbox", "id": "show_compare", "label": "Show the energy curve comparison", "default": true },
+    { "type": "text", "id": "compare_a_title", "label": "Left title", "default": "Energy drink" },
+    { "type": "textarea", "id": "compare_a_text", "label": "Left text", "default": "Fast spike, hard landing. Stimulants push the system and leave you paying the difference an hour later." },
+    { "type": "text", "id": "compare_b_title", "label": "Right title", "default": "Cold-pressed juice" },
+    { "type": "textarea", "id": "compare_b_text", "label": "Right text", "default": "A steadier climb that holds. Natural sugars arrive with the minerals that help your body put them to work." },
+
+    { "type": "header", "content": "Footnote" },
+    { "type": "text", "id": "footnote", "label": "Footnote", "default": "General nutrition information, not medical advice." }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "stat", "label": "Stat or label" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Potassium" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "The electrolyte behind muscle contraction and nerve signals." },
+        { "type": "color", "id": "accent", "label": "Accent", "default": "#FF7A2B" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Energy and electrolytes",
+      "blocks": [
+        { "type": "point", "settings": { "stat": "Potassium", "heading": "Keeps the signal clean", "body": "Potassium moves fluid in and out of your cells and helps muscles contract and nerves fire. Orange, beet, and leafy greens all carry it. Sweat it out and everything feels heavier than it should.", "accent": "#FF7A2B" } },
+        { "type": "point", "settings": { "stat": "Magnesium", "heading": "Turns food into fuel", "body": "Magnesium is a cofactor in the reactions that produce ATP, the molecule your cells actually spend as energy. Dark greens are one of the better food sources, and most people run low.", "accent": "#6FB84A" } },
+        { "type": "point", "settings": { "stat": "Hydration", "heading": "Water that stays put", "body": "Plain water passes through. Water arriving with sodium, potassium, and natural sugars is absorbed more efficiently, which is the whole principle behind oral rehydration.", "accent": "#4BB8E8" } },
+        { "type": "point", "settings": { "stat": "Natural sugars", "heading": "Fuel with instructions", "body": "Fructose and glucose from whole fruit come packaged with vitamins, minerals, and plant compounds. Same sugar, entirely different delivery than a syrup and a stimulant.", "accent": "#C2255C" } },
+        { "type": "point", "settings": { "stat": "Cold-pressed", "heading": "Nothing cooked off", "body": "Heat pasteurization extends shelf life but degrades some vitamins and enzymes. Cold-pressing trades shelf life for keeping more of what was in the fruit.", "accent": "#E8A854" } },
+        { "type": "point", "settings": { "stat": "No crash", "heading": "Nothing to come down from", "body": "There's no stimulant in the bottle, so there's no rebound. What you feel is hydration and fuel doing their job, not a borrowed spike.", "accent": "#2F9E44" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

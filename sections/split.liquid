@@ -1,0 +1,53 @@
+<section class="split{% if section.settings.flip %} split--flip{% endif %}{% if section.settings.tinted %} split--tint{% endif %}">
+  <div class="split__media">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | escape }}" width="1200" loading="lazy">
+    {%- else -%}
+      <div class="split__placeholder">{%- render 'fruit-shape', fruit: section.settings.fruit -%}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="split__body">
+    <h2 class="split__title">{{ section.settings.title }}</h2>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="split__sub">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="split__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="split__list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>{{ block.settings.item }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <a class="btn btn--ink" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Photo and text",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "fruit", "label": "Fallback illustration", "default": "watermelon" },
+    { "type": "checkbox", "id": "flip", "label": "Photo on the right", "default": false },
+    { "type": "checkbox", "id": "tinted", "label": "Blush background", "default": false },
+    { "type": "text", "id": "title", "label": "Title", "default": "Doing right by our wholesale partners" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Serving cafés, gyms, and grocers across the metro" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Info for buyers" },
+    { "type": "url", "id": "cta_url", "label": "Button link" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "List item", "settings": [ { "type": "text", "id": "item", "label": "Item", "default": "Customized programs from single cases to full runs" } ] }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Photo and text" }]
+}
+{% endschema %}

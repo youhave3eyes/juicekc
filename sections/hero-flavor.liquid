@@ -1,0 +1,110 @@
+<section class="hero" data-hero data-flavor-host>
+  <div class="hero__media">
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 2200 }}"
+        srcset="{{ section.settings.image | image_url: width: 800 }} 800w,
+                {{ section.settings.image | image_url: width: 1400 }} 1400w,
+                {{ section.settings.image | image_url: width: 2200 }} 2200w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="2200"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- endif -%}
+    <div class="hero__wash" data-hero-wash></div>
+  </div>
+
+  <div class="hero__fruit" data-fruit-field aria-hidden="true">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'flavor' -%}
+        {%- assign fruits = block.settings.fruits | split: ',' -%}
+        <div class="hero__fruit-set{% if forloop.first %} is-on{% endif %}" data-fruit-set="{{ forloop.index0 }}">
+          {%- for f in fruits limit: 6 -%}
+            <span class="fruit" data-depth="{{ forloop.index | times: 6 | plus: 14 }}" style="--i:{{ forloop.index }}">
+              {%- render 'fruit-shape', fruit: f | strip -%}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="hero__stage">
+    <p class="hero__kicker">{{ section.settings.kicker }}</p>
+
+    <h1 class="hero__title" data-hero-title>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'flavor' -%}
+          <span class="hero__title-line{% if forloop.first %} is-on{% endif %}" data-title="{{ forloop.index0 }}">{{ block.settings.headline }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </h1>
+
+    <p class="hero__note" data-hero-note>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'flavor' -%}
+          <span class="hero__note-line{% if forloop.first %} is-on{% endif %}" data-note="{{ forloop.index0 }}">{{ block.settings.note }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </p>
+
+    <div class="hero__picker" role="tablist" aria-label="Choose a juice">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'flavor' -%}
+          <button
+            class="chip{% if forloop.first %} is-on{% endif %}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            data-flavor="{{ forloop.index0 }}"
+            data-color="{{ block.settings.color }}"
+            data-ink="{{ block.settings.ink }}"
+            {{ block.shopify_attributes }}
+          >{{ block.settings.name }}</button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="hero__cta">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'flavor' -%}
+          <a class="btn btn--ink{% if forloop.first %} is-on{% endif %}" data-cta="{{ forloop.index0 }}" href="{{ block.settings.product.url | default: routes.all_products_collection_url }}">
+            {{ block.settings.cta | default: 'Shop this one' }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+      <a class="hero__link" href="{{ section.settings.secondary_url | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Welcome hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background photo", "info": "A wide, warm photo works best — the press, the fruit, the people." },
+    { "type": "text", "id": "kicker", "label": "Small line above headline", "default": "Pressed this morning in Kansas City" },
+    { "type": "text", "id": "secondary_label", "label": "Text link", "default": "dig a little deeper" },
+    { "type": "url", "id": "secondary_url", "label": "Text link URL" }
+  ],
+  "blocks": [
+    {
+      "type": "flavor",
+      "name": "Flavor",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Flavor name", "default": "Cold Snap" },
+        { "type": "text", "id": "headline", "label": "Headline", "default": "Welcome to Juice KC" },
+        { "type": "text", "id": "note", "label": "Supporting line", "default": "Orange, lemon, ginger. Nothing else in the bottle." },
+        { "type": "color", "id": "color", "label": "Flavor color", "default": "#EF5B8C" },
+        { "type": "color", "id": "ink", "label": "Text color", "default": "#FFF9F5" },
+        { "type": "text", "id": "fruits", "label": "Fruit (comma separated)", "info": "watermelon, apple, cherries, carrot, banana, pear, avocado", "default": "orange,lemon,ginger,orange,mint,lemon" },
+        { "type": "product", "id": "product", "label": "Linked product" },
+        { "type": "text", "id": "cta", "label": "Button label", "default": "Shop Cold Snap" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "Welcome hero" }]
+}
+{% endschema %}

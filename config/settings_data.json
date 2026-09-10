@@ -1,0 +1,13 @@
+{
+  "current": {
+    "color_ink": "#3A2430",
+    "color_bone": "#FFF9F5",
+    "color_blush": "#FDE8EE",
+    "color_pink": "#EF5B8C",
+    "color_citrus": "#F5943D",
+    "color_leaf": "#7FB45F",
+    "motion_fruit": true,
+    "motion_tilt": true,
+    "motion_strength": 5
+  }
+}

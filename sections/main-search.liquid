@@ -1,0 +1,33 @@
+<section class="lineup">
+  <div class="lineup__head">
+    <h1 class="lineup__title">Search</h1>
+  </div>
+
+  <form class="search" action="{{ routes.search_url }}" method="get" role="search">
+    <input class="search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Try beet, ginger, wholesale" aria-label="Search">
+    <button class="btn btn--ink" type="submit">Search</button>
+  </form>
+
+  {%- if search.performed -%}
+    <div class="lineup__grid">
+      {%- for item in search.results -%}
+        <a class="bottle" href="{{ item.url }}" data-tilt>
+          <div class="bottle__art">
+            {%- if item.featured_image -%}
+              <img src="{{ item.featured_image | image_url: width: 560 }}" alt="{{ item.featured_image.alt | escape }}" width="560" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="bottle__meta">
+            <span class="bottle__name">{{ item.title }}</span>
+          </div>
+        </a>
+      {%- else -%}
+        <p class="empty">No matches for that. Try a single ingredient.</p>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

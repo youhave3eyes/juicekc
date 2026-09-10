@@ -1,0 +1,104 @@
+<section class="batch" data-batch>
+  <div class="batch__copy">
+    <h2 class="batch__title">{{ section.settings.title }}</h2>
+    <p class="batch__text">{{ section.settings.text }}</p>
+  </div>
+
+  <div class="batch__panel">
+    <div class="batch__top">
+      <label class="batch__label" for="batchRange">Bottles</label>
+      <span class="batch__count" data-batch-qty>{{ section.settings.min }}</span>
+    </div>
+
+    <input
+      class="batch__range"
+      id="batchRange"
+      type="range"
+      min="{{ section.settings.min }}"
+      max="{{ section.settings.max }}"
+      step="{{ section.settings.step }}"
+      value="{{ section.settings.min }}"
+      data-batch-range
+      data-tiers='[
+        { "qty": 1,  "price": {{ section.settings.price_t1 | default: 9 }},  "color": "{{ section.settings.color_t1 }}", "label": "{{ section.settings.label_t1 }}" },
+        { "qty": {{ section.settings.qty_t2 }}, "price": {{ section.settings.price_t2 }}, "color": "{{ section.settings.color_t2 }}", "label": "{{ section.settings.label_t2 }}" },
+        { "qty": {{ section.settings.qty_t3 }}, "price": {{ section.settings.price_t3 }}, "color": "{{ section.settings.color_t3 }}", "label": "{{ section.settings.label_t3 }}" },
+        { "qty": {{ section.settings.qty_t4 }}, "price": {{ section.settings.price_t4 }}, "color": "{{ section.settings.color_t4 }}", "label": "{{ section.settings.label_t4 }}" },
+        { "qty": {{ section.settings.qty_t5 }}, "price": {{ section.settings.price_t5 }}, "color": "{{ section.settings.color_t5 }}", "label": "{{ section.settings.label_t5 }}" }
+      ]'
+      aria-describedby="batchTier"
+    >
+
+    <div class="batch__readout">
+      <div class="batch__stat batch__stat--unit">
+        <span class="batch__stat-num" data-batch-unit>&mdash;</span>
+        <span class="batch__stat-label">per bottle</span>
+      </div>
+      <div class="batch__stat">
+        <span class="batch__stat-num" data-batch-total>&mdash;</span>
+        <span class="batch__stat-label">order total</span>
+      </div>
+      <div class="batch__stat">
+        <span class="batch__stat-num" data-batch-saved>&mdash;</span>
+        <span class="batch__stat-label">you save</span>
+      </div>
+    </div>
+
+    <p class="batch__tier" id="batchTier" data-batch-tier></p>
+
+    <div class="batch__pips" data-batch-pips aria-hidden="true"></div>
+
+    <a class="btn btn--ink btn--wide" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">{{ section.settings.cta_label }}</a>
+    <p class="batch__fine">{{ section.settings.fine_print }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Batch calculator",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "The more you grab, the less each one costs" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every bottle is pressed the same morning. Slide to see where your order lands." },
+
+    { "type": "header", "content": "Range" },
+    { "type": "number", "id": "min", "label": "Minimum bottles", "default": 5 },
+    { "type": "number", "id": "max", "label": "Maximum bottles", "default": 50 },
+    { "type": "number", "id": "step", "label": "Step", "default": 1 },
+
+    { "type": "header", "content": "Tier 1" },
+    { "type": "text", "id": "price_t1", "label": "Price per bottle", "default": "9" },
+    { "type": "color", "id": "color_t1", "label": "Color", "default": "#8A8580" },
+    { "type": "text", "id": "label_t1", "label": "Message", "default": "Single-bottle price" },
+
+    { "type": "header", "content": "Tier 2" },
+    { "type": "number", "id": "qty_t2", "label": "Starts at", "default": 3 },
+    { "type": "text", "id": "price_t2", "label": "Price per bottle", "default": "8" },
+    { "type": "color", "id": "color_t2", "label": "Color", "default": "#FF7A2B" },
+    { "type": "text", "id": "label_t2", "label": "Message", "default": "Three-bottle rate" },
+
+    { "type": "header", "content": "Tier 3" },
+    { "type": "number", "id": "qty_t3", "label": "Starts at", "default": 6 },
+    { "type": "text", "id": "price_t3", "label": "Price per bottle", "default": "7" },
+    { "type": "color", "id": "color_t3", "label": "Color", "default": "#E8A854" },
+    { "type": "text", "id": "label_t3", "label": "Message", "default": "Half-case rate" },
+
+    { "type": "header", "content": "Tier 4" },
+    { "type": "number", "id": "qty_t4", "label": "Starts at", "default": 9 },
+    { "type": "text", "id": "price_t4", "label": "Price per bottle", "default": "6" },
+    { "type": "color", "id": "color_t4", "label": "Color", "default": "#6FB84A" },
+    { "type": "text", "id": "label_t4", "label": "Message", "default": "Full-case rate" },
+
+    { "type": "header", "content": "Tier 5" },
+    { "type": "number", "id": "qty_t5", "label": "Starts at", "default": 33 },
+    { "type": "text", "id": "price_t5", "label": "Price per bottle", "default": "5" },
+    { "type": "color", "id": "color_t5", "label": "Color", "default": "#2F9E44" },
+    { "type": "text", "id": "label_t5", "label": "Message", "default": "Best rate — stocking up" },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Build my order" },
+    { "type": "url", "id": "cta_url", "label": "Button link" },
+    { "type": "text", "id": "fine_print", "label": "Fine print", "default": "Estimate only. Final pricing depends on recipe and delivery window." }
+  ],
+  "presets": [{ "name": "Batch calculator" }]
+}
+{% endschema %}

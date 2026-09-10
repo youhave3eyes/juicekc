@@ -1,0 +1,38 @@
+<footer class="foot">
+  <div class="foot__grid">
+    <div class="foot__block">
+      <p class="foot__big">{{ section.settings.big_line }}</p>
+    </div>
+
+    <nav class="foot__block" aria-label="Footer">
+      {%- for link in section.settings.menu.links -%}
+        <a class="foot__link" href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="foot__block">
+      <p class="foot__label">{{ section.settings.signup_title }}</p>
+      {%- form 'customer', id: 'FootSignup' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="foot__row">
+          <input class="foot__input" type="email" name="contact[email]" placeholder="you@email.com" aria-label="Email" required>
+          <button class="foot__go" type="submit">Join</button>
+        </div>
+        {%- if form.posted_successfully? -%}<p class="foot__ok">You're on the list.</p>{%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+
+  <p class="foot__legal">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} &middot; Kansas City</p>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "big_line", "label": "Big line", "default": "Pressed in Kansas City." },
+    { "type": "text", "id": "signup_title", "label": "Signup title", "default": "New flavors, drop dates" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+  ]
+}
+{% endschema %}

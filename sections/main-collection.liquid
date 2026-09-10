@@ -1,0 +1,30 @@
+<section class="lineup">
+  <div class="lineup__head">
+    <h1 class="lineup__title">{{ collection.title }}</h1>
+  </div>
+
+  {%- paginate collection.products by 24 -%}
+    <div class="lineup__grid">
+      {%- for p in collection.products -%}
+        <a class="bottle" href="{{ p.url }}" data-tilt>
+          <div class="bottle__art">
+            {%- if p.featured_image -%}
+              <img src="{{ p.featured_image | image_url: width: 560 }}" alt="{{ p.featured_image.alt | escape }}" width="560" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="bottle__meta">
+            <span class="bottle__name">{{ p.title }}</span>
+            <span class="bottle__price">{{ p.price | money }}</span>
+          </div>
+        </a>
+      {%- else -%}
+        <p class="empty">Nothing here yet. Check the full lineup.</p>
+      {%- endfor -%}
+    </div>
+    {{ paginate | default_pagination }}
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

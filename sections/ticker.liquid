@@ -1,0 +1,38 @@
+<section class="ticker" style="background:{{ section.settings.bg }};color:{{ section.settings.ink }};">
+  <div class="ticker__track">
+    {%- for i in (1..3) -%}
+      <span class="ticker__run" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+        {%- for block in section.blocks -%}
+          <span class="ticker__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          <span class="ticker__dot"></span>
+        {%- endfor -%}
+      </span>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ticker",
+  "settings": [
+    { "type": "color", "id": "bg", "label": "Background", "default": "#14100C" },
+    { "type": "color", "id": "ink", "label": "Text", "default": "#FCFAF7" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Phrase", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Cold-pressed" } ] }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ticker",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Cold-pressed daily" } },
+        { "type": "item", "settings": { "text": "Certified organic" } },
+        { "type": "item", "settings": { "text": "Kansas City" } },
+        { "type": "item", "settings": { "text": "No concentrate, ever" } },
+        { "type": "item", "settings": { "text": "Wholesale by the case" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

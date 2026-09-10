@@ -1,0 +1,49 @@
+<section class="pdp">
+  <div class="pdp__art">
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape }}" width="900">
+    {%- endif -%}
+  </div>
+
+  <div class="pdp__info">
+    <h1 class="pdp__title">{{ product.title }}</h1>
+    <p class="pdp__price" data-pdp-price>{{ product.selected_or_first_available_variant.price | money }}</p>
+
+    <div class="pdp__desc">{{ product.description }}</div>
+
+    {%- form 'product', product, id: 'AddForm' -%}
+      {%- unless product.has_only_default_variant -%}
+        <label class="pdp__label" for="variantSelect">Size</label>
+        <select class="pdp__select" id="variantSelect" name="id" data-variant-select>
+          {%- for v in product.variants -%}
+            <option value="{{ v.id }}" data-price="{{ v.price | money }}" {% if v == product.selected_or_first_available_variant %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>
+              {{ v.title }}{% unless v.available %} — sold out{% endunless %}
+            </option>
+          {%- endfor -%}
+        </select>
+      {%- else -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {%- endunless -%}
+
+      <div class="pdp__qty">
+        <label class="pdp__label" for="qty">Quantity</label>
+        <input class="pdp__number" id="qty" type="number" name="quantity" value="1" min="1">
+      </div>
+
+      <button class="btn btn--ink btn--wide" type="submit" name="add" {% unless product.available %}disabled{% endunless %}>
+        {% if product.available %}Add to cart{% else %}Sold out{% endif %}
+      </button>
+    {%- endform -%}
+
+    <p class="pdp__note">{{ section.settings.note }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "text", "id": "note", "label": "Note under button", "default": "Pressed to order. Local delivery and pickup at checkout." }
+  ]
+}
+{% endschema %}

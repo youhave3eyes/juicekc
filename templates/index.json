@@ -1,0 +1,369 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-flavor",
+      "blocks": {
+        "f1": {
+          "type": "flavor",
+          "settings": {
+            "name": "Cold Snap",
+            "headline": "Welcome to Juice KC",
+            "note": "Orange, lemon, and ginger, pressed the morning you get it.",
+            "color": "#EF5B8C",
+            "ink": "#FFF9F5",
+            "fruits": "watermelon,banana,apple,pear,carrot,avocado",
+            "cta": "Shop Cold Snap"
+          }
+        },
+        "f2": {
+          "type": "flavor",
+          "settings": {
+            "name": "Deep Red",
+            "headline": "Sweet, earthy, honest",
+            "note": "Beet, apple, and lemon. Nothing hiding in the bottle.",
+            "color": "#C2456F",
+            "ink": "#FFF9F5",
+            "fruits": "cherries,apple,watermelon,pear,carrot,banana",
+            "cta": "Shop Deep Red"
+          }
+        },
+        "f3": {
+          "type": "flavor",
+          "settings": {
+            "name": "Field Day",
+            "headline": "Green, and glad about it",
+            "note": "Apple, mint, cucumber, and lemon. Bright, never bitter.",
+            "color": "#6FA85A",
+            "ink": "#FFF9F5",
+            "fruits": "pear,avocado,banana,watermelon,apple,cherries",
+            "cta": "Shop Field Day"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "kicker": "Pressed this morning in Kansas City",
+        "secondary_label": "dig a little deeper"
+      }
+    },
+    "ticker": {
+      "type": "ticker",
+      "blocks": {
+        "t1": {
+          "type": "item",
+          "settings": {
+            "text": "Cold-pressed daily"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "text": "Certified organic"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "text": "Kansas City grown and pressed"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "text": "Never from concentrate"
+          }
+        },
+        "t5": {
+          "type": "item",
+          "settings": {
+            "text": "Wholesale by the case"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "bg": "#3A2430",
+        "ink": "#FFF9F5"
+      }
+    },
+    "harvest": {
+      "type": "harvest",
+      "blocks": {
+        "h1": {
+          "type": "pick",
+          "settings": {
+            "fruit": "watermelon",
+            "heading": "Citrus Pressings",
+            "tagline": "Seriously satisfying citrus",
+            "link_label": "learn more"
+          }
+        },
+        "h2": {
+          "type": "pick",
+          "settings": {
+            "fruit": "cherries",
+            "heading": "Root Blends",
+            "tagline": "Earthy, sweet, and grounding",
+            "link_label": "learn more"
+          }
+        },
+        "h3": {
+          "type": "pick",
+          "settings": {
+            "fruit": "pear",
+            "heading": "Green Pressings",
+            "tagline": "Bright greens, never bitter",
+            "link_label": "learn more"
+          }
+        },
+        "h4": {
+          "type": "pick",
+          "settings": {
+            "fruit": "carrot",
+            "heading": "Seasonal Small Batch",
+            "tagline": "Whatever is best that week",
+            "link_label": "learn more"
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ],
+      "settings": {
+        "title": "Check out the fruits of our labor",
+        "subtitle": "Sourced, pressed, and bottled with care"
+      }
+    },
+    "buyers": {
+      "type": "split",
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "item": "Programs from a single case to a standing weekly run"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "item": "Organic produce sourced through regional growers"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "item": "Pressed and delivered the same morning"
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "item": "Labels and packaging that look good on a shelf"
+          }
+        },
+        "b5": {
+          "type": "item",
+          "settings": {
+            "item": "Reliable delivery across the metro"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "fruit": "cherries",
+        "flip": false,
+        "tinted": false,
+        "title": "Doing right by our wholesale partners",
+        "subtitle": "Serving caf\u00e9s, gyms, and grocers across the metro",
+        "cta_label": "Info for buyers"
+      }
+    },
+    "energy": {
+      "type": "energy",
+      "blocks": {
+        "e1": {
+          "type": "point",
+          "settings": {
+            "stat": "Potassium",
+            "heading": "Keeps the signal clean",
+            "body": "Potassium moves fluid in and out of your cells and helps muscles contract and nerves fire. Orange, beet, and leafy greens all carry it.",
+            "accent": "#F5943D"
+          }
+        },
+        "e2": {
+          "type": "point",
+          "settings": {
+            "stat": "Magnesium",
+            "heading": "Turns food into fuel",
+            "body": "Magnesium is a cofactor in the reactions that produce ATP, the molecule your cells actually spend as energy. Dark greens are one of the better food sources.",
+            "accent": "#7FB45F"
+          }
+        },
+        "e3": {
+          "type": "point",
+          "settings": {
+            "stat": "Hydration",
+            "heading": "Water that stays put",
+            "body": "Plain water passes through. Water arriving with sodium, potassium, and natural sugars is absorbed more efficiently, which is the principle behind oral rehydration.",
+            "accent": "#5BA7C4"
+          }
+        },
+        "e4": {
+          "type": "point",
+          "settings": {
+            "stat": "Natural sugars",
+            "heading": "Fuel with instructions",
+            "body": "Fructose and glucose from whole fruit come packaged with vitamins, minerals, and plant compounds. Same sugar, entirely different delivery.",
+            "accent": "#EF5B8C"
+          }
+        },
+        "e5": {
+          "type": "point",
+          "settings": {
+            "stat": "Cold-pressed",
+            "heading": "Nothing cooked off",
+            "body": "Heat pasteurization extends shelf life but degrades some vitamins and enzymes. Cold-pressing trades shelf life for keeping more of what was in the fruit.",
+            "accent": "#E0B183"
+          }
+        },
+        "e6": {
+          "type": "point",
+          "settings": {
+            "stat": "No crash",
+            "heading": "Nothing to come down from",
+            "body": "There is no stimulant in the bottle, so there is no rebound. What you feel is hydration and fuel doing their job.",
+            "accent": "#6FA85A"
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6"
+      ],
+      "settings": {
+        "title": "Energy you don't crash out of",
+        "lede": "Caffeine borrows energy against later. Fruit sugar arrives with the water, minerals, and enzymes your body needs to actually use it.",
+        "show_compare": true,
+        "compare_a_title": "Energy drink",
+        "compare_a_text": "Fast spike, hard landing. Stimulants push the system and leave you paying the difference an hour later.",
+        "compare_b_title": "Cold-pressed juice",
+        "compare_b_text": "A steadier climb that holds. Natural sugars arrive with the minerals that help your body put them to work.",
+        "footnote": "General nutrition information, not medical advice."
+      }
+    },
+    "batch": {
+      "type": "batch-calculator",
+      "settings": {
+        "title": "The more you take home, the less each one costs",
+        "text": "Every bottle is pressed the same morning. Slide to see where your order lands.",
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "price_t1": "9",
+        "color_t1": "#9A8A92",
+        "label_t1": "Single-bottle price",
+        "qty_t2": 3,
+        "price_t2": "8",
+        "color_t2": "#EF5B8C",
+        "label_t2": "Three-bottle rate",
+        "qty_t3": 6,
+        "price_t3": "7",
+        "color_t3": "#F5943D",
+        "label_t3": "Half-case rate",
+        "qty_t4": 9,
+        "price_t4": "6",
+        "color_t4": "#7FB45F",
+        "label_t4": "Full-case rate",
+        "qty_t5": 33,
+        "price_t5": "5",
+        "color_t5": "#5E9243",
+        "label_t5": "Best rate \u2014 stocking up",
+        "cta_label": "Build my order",
+        "fine_print": "Estimate only. Final pricing depends on recipe and delivery window."
+      }
+    },
+    "story": {
+      "type": "split",
+      "settings": {
+        "fruit": "watermelon",
+        "flip": true,
+        "tinted": true,
+        "title": "Deliciously different",
+        "subtitle": "Small batch, same morning, every time",
+        "text": "<p>We press in small runs so nothing sits. The fruit comes in, it goes through the press, and it goes out the door the same day. That is the whole method, and it is why the bottle tastes like the fruit it came from.</p>",
+        "cta_label": "Learn more"
+      }
+    },
+    "sourcing": {
+      "type": "sourcing",
+      "blocks": {
+        "s1": {
+          "type": "item",
+          "settings": {
+            "fruit": "apple",
+            "heading": "Organic produce",
+            "body": "Certified organic fruit and vegetables, sourced through regional growers and produce partners around the metro."
+          }
+        },
+        "s2": {
+          "type": "item",
+          "settings": {
+            "fruit": "pear",
+            "heading": "Pressed cold",
+            "body": "No heat, no shortcuts. The press runs in the morning and bottles go out the same day."
+          }
+        },
+        "s3": {
+          "type": "item",
+          "settings": {
+            "fruit": "watermelon",
+            "heading": "Small runs and full cases",
+            "body": "Five bottles for the week or fifty for a standing account. Same juice either way."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "title": "Where the fruit comes from",
+        "lede": "Organic first, local when the season allows, and never from concentrate."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "harvest",
+    "buyers",
+    "energy",
+    "batch",
+    "story",
+    "sourcing"
+  ]
+}

@@ -1,0 +1,65 @@
+<section class="lineup">
+  <div class="lineup__head">
+    <h2 class="lineup__title">{{ section.settings.title }}</h2>
+    {%- if section.settings.link_label != blank -%}
+      <a class="lineup__link" href="{{ section.settings.link_url | default: routes.all_products_collection_url }}">{{ section.settings.link_label }}</a>
+    {%- endif -%}
+  </div>
+
+  <div class="lineup__grid">
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      <a class="bottle" href="{{ p.url | default: routes.all_products_collection_url }}" style="--tint:{{ block.settings.tint }};" data-tilt {{ block.shopify_attributes }}>
+        <div class="bottle__art">
+          {%- if p.featured_image -%}
+            <img src="{{ p.featured_image | image_url: width: 560 }}" alt="{{ p.featured_image.alt | escape }}" width="560" loading="lazy">
+          {%- else -%}
+
+          {%- endif -%}
+        </div>
+        <div class="bottle__meta">
+          <span class="bottle__name">{{ p.title | default: block.settings.fallback_name }}</span>
+          <span class="bottle__price">{% if p.price %}{{ p.price | money }}{% else %}{{ block.settings.fallback_price }}{% endif %}</span>
+        </div>
+        <span class="bottle__ing">{{ block.settings.ingredients }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Juice lineup",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "What we're pressing" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "All juices" },
+    { "type": "url", "id": "link_url", "label": "Link" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Juice",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "color", "id": "tint", "label": "Card tint", "default": "#FF7A2B" },
+        { "type": "text", "id": "fruit", "label": "Fallback fruit shape", "default": "orange" },
+        { "type": "text", "id": "fallback_name", "label": "Fallback name", "default": "Cold Snap" },
+        { "type": "text", "id": "fallback_price", "label": "Fallback price", "default": "$9.00" },
+        { "type": "text", "id": "ingredients", "label": "Ingredients line", "default": "Orange, lemon, ginger" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Juice lineup",
+      "blocks": [
+        { "type": "item", "settings": { "tint": "#FF7A2B", "fruit": "orange", "fallback_name": "Cold Snap", "ingredients": "Orange, lemon, ginger" } },
+        { "type": "item", "settings": { "tint": "#C2255C", "fruit": "beet", "fallback_name": "Deep Red", "ingredients": "Beet, apple, lemon" } },
+        { "type": "item", "settings": { "tint": "#3FA34D", "fruit": "mint", "fallback_name": "Field Day", "ingredients": "Apple, mint, cucumber" } },
+        { "type": "item", "settings": { "tint": "#E8A854", "fruit": "carrot", "fallback_name": "Root Cause", "ingredients": "Carrot, orange, turmeric" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

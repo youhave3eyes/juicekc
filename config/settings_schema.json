@@ -1,0 +1,77 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Juice KC",
+    "theme_version": "1.0.0",
+    "theme_author": "Juice KC",
+    "theme_documentation_url": "https://shopify.dev",
+    "theme_support_url": "https://shopify.dev"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (text)",
+        "default": "#3A2430"
+      },
+      {
+        "type": "color",
+        "id": "color_bone",
+        "label": "Paper",
+        "default": "#FFF9F5"
+      },
+      {
+        "type": "color",
+        "id": "color_blush",
+        "label": "Blush",
+        "default": "#FDE8EE"
+      },
+      {
+        "type": "color",
+        "id": "color_pink",
+        "label": "Signature pink",
+        "default": "#EF5B8C"
+      },
+      {
+        "type": "color",
+        "id": "color_citrus",
+        "label": "Citrus",
+        "default": "#F5943D"
+      },
+      {
+        "type": "color",
+        "id": "color_leaf",
+        "label": "Leaf",
+        "default": "#7FB45F"
+      }
+    ]
+  },
+  {
+    "name": "Motion",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "motion_fruit",
+        "label": "Fruit follows the cursor",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "motion_tilt",
+        "label": "Cards tilt on hover",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "motion_strength",
+        "label": "Motion strength",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 6
+      }
+    ]
+  }
+]

@@ -1,0 +1,80 @@
+{%- if section.settings.enabled -%}
+<div
+  class="fly"
+  data-fly
+  data-min-delay="{{ section.settings.min_delay }}"
+  data-max-delay="{{ section.settings.max_delay }}"
+  data-speed="{{ section.settings.speed }}"
+  data-size="{{ section.settings.size }}"
+  data-first-delay="{{ section.settings.first_delay }}"
+  data-swats-needed="{{ section.settings.swats_needed }}"
+  data-show-tally="{{ section.settings.show_tally }}"
+  data-greet-every="{{ section.settings.greet_every_visit }}"
+  aria-hidden="true"
+>
+  <div class="fly__body">
+    <span class="fly__art">
+      <span class="fly__wings" aria-hidden="true">
+        <svg viewBox="0 0 200 90" class="fly__wingsvg">
+          <ellipse class="fly__wing fly__wing--l1" cx="62" cy="40" rx="46" ry="18" fill="#FDF3EA" fill-opacity=".72" stroke="#242424" stroke-width="5"/>
+          <ellipse class="fly__wing fly__wing--l2" cx="72" cy="58" rx="34" ry="13" fill="#FDF3EA" fill-opacity=".6" stroke="#242424" stroke-width="5"/>
+          <ellipse class="fly__wing fly__wing--r1" cx="138" cy="40" rx="46" ry="18" fill="#FDF3EA" fill-opacity=".72" stroke="#242424" stroke-width="5"/>
+          <ellipse class="fly__wing fly__wing--r2" cx="128" cy="58" rx="34" ry="13" fill="#FDF3EA" fill-opacity=".6" stroke="#242424" stroke-width="5"/>
+        </svg>
+      </span>
+      <span class="fly__char">{%- render 'fruit-watermelon' -%}</span>
+    </span>
+  </div>
+
+  <span class="fly__tally" data-fly-tally aria-hidden="true"></span>
+
+  <span class="fly__say" data-fly-say aria-hidden="true">{{ section.settings.greeting }}</span>
+</div>
+
+<div class="reward" data-reward hidden>
+  <div class="reward__card" role="dialog" aria-modal="true" aria-labelledby="rewardTitle">
+    <button class="reward__close" data-reward-close aria-label="Close">&times;</button>
+
+    <span class="reward__mascot">{%- render 'fruit-shape', fruit: 'watermelon' -%}</span>
+
+    <h2 class="reward__title" id="rewardTitle">{{ section.settings.reward_title }}</h2>
+    <p class="reward__text">{{ section.settings.reward_text }}</p>
+
+    <div class="reward__code">
+      <code data-reward-code>{{ section.settings.discount_code }}</code>
+      <button class="reward__copy" data-reward-copy type="button">Copy</button>
+    </div>
+
+    <a class="btn btn--ink btn--wide" href="/discount/{{ section.settings.discount_code | url_encode }}" data-reward-apply>
+      {{ section.settings.reward_cta }}
+    </a>
+    <p class="reward__fine">{{ section.settings.reward_fine }}</p>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Flying mascot",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Let him loose", "default": true },
+    { "type": "range", "id": "size", "label": "Size (px)", "min": 60, "max": 200, "step": 10, "default": 110 },
+    { "type": "range", "id": "first_delay", "label": "First appearance after (seconds)", "min": 1, "max": 60, "step": 1, "default": 3 },
+    { "type": "range", "id": "min_delay", "label": "Minimum gap between flights (seconds)", "min": 5, "max": 120, "step": 5, "default": 30 },
+    { "type": "range", "id": "max_delay", "label": "Maximum gap between flights (seconds)", "min": 10, "max": 180, "step": 5, "default": 45 },
+    { "type": "range", "id": "speed", "label": "Flight length (seconds)", "min": 4, "max": 20, "step": 1, "default": 9 },
+
+    { "type": "header", "content": "Catch reward" },
+    { "type": "paragraph", "content": "Create the discount code in Discounts first, then paste it here. Set a usage limit of one per customer." },
+    { "type": "range", "id": "swats_needed", "label": "Catches needed to earn it", "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "show_tally", "label": "Show a counter after each catch", "default": true },
+    { "type": "text", "id": "greeting", "label": "What he says the first time", "default": "Catch me 3 times for 5% off" },
+    { "type": "checkbox", "id": "greet_every_visit", "label": "Say it on every visit", "info": "Off means he only says it once per person.", "default": false },
+    { "type": "text", "id": "discount_code", "label": "Discount code", "default": "SWAT5" },
+    { "type": "text", "id": "reward_title", "label": "Reward title", "default": "You caught him. Three times." },
+    { "type": "textarea", "id": "reward_text", "label": "Reward text", "default": "That earns you 5% off your order. He'll be back around, but the code is yours to keep." },
+    { "type": "text", "id": "reward_cta", "label": "Button label", "default": "Apply 5% off" },
+    { "type": "text", "id": "reward_fine", "label": "Fine print", "default": "One use per customer. Applies at checkout." }
+  ]
+}
+{% endschema %}

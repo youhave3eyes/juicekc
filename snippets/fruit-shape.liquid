@@ -1,0 +1,13 @@
+{%- liquid
+  assign kind = fruit | default: 'watermelon' | strip | downcase
+-%}
+{%- case kind -%}
+  {%- when 'watermelon' -%}{%- render 'fruit-watermelon' -%}
+  {%- when 'apple' -%}{%- render 'fruit-apple' -%}
+  {%- when 'cherries', 'cherry', 'beet' -%}{%- render 'fruit-cherries' -%}
+  {%- when 'carrot', 'ginger' -%}{%- render 'fruit-carrot' -%}
+  {%- when 'banana', 'lemon' -%}{%- render 'fruit-banana' -%}
+  {%- when 'pear', 'mint', 'grapes' -%}{%- render 'fruit-pear' -%}
+  {%- when 'avocado', 'orange' -%}{%- render 'fruit-avocado' -%}
+  {%- else -%}{%- render 'fruit-watermelon' -%}
+{%- endcase -%}
