@@ -23,7 +23,7 @@
         <div class="hero__fruit-set{% if forloop.first %} is-on{% endif %}" data-fruit-set="{{ forloop.index0 }}">
           {%- for f in fruits limit: 6 -%}
             <span class="fruit" data-depth="{{ forloop.index | times: 6 | plus: 14 }}" style="--i:{{ forloop.index }}">
-              {%- render 'fruit-shape', fruit: f | strip -%}
+              {%- render 'fruit-shape', fruit: f -%}
             </span>
           {%- endfor -%}
         </div>
@@ -108,3 +108,13 @@
   "presets": [{ "name": "Welcome hero" }]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'fruit-shape', fruit: f | strip -%}"
+  to: "{%- render 'fruit-shape', fruit: f -%}"
+  position: 1174..1212
+{% endcomment %}
